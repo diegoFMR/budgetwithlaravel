@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Add Expense Type</title>
+	<title>Expense Type</title>
 </head>
 <body>
 
@@ -19,7 +19,7 @@
 
 		</div>
 		<div class="form-group">
-			<button type="submit" value="submit" class="btn btn-primary mb-2">Create</button>
+			<button type="submit" value="submit" class="btn btn-primary mb-2">Insert</button>
 		</div>
 	</form>
 

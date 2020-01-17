@@ -15,22 +15,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+// GET
+Route::get('insert/expense-type', function(ExpenseType $expense){
+	return view('insert_expense_type',['expenseType'=>$expense]);
+});
 Route::get('edit/expense-type/{id}', 'ExpenseTypeController@edit');
 
+// POST
+Route::post('create/expense-type', 'ExpenseTypeController@insert');
+Route::put('delete/expense-type','ExpenseTypeController@delete');
 
-Route::get('add/expense-type', function(ExpenseType $expense){
-	return view('add_expense_type',['expenseType'=>$expense]);
-});
 
 
 // Route::get('edit/expense-type/{$id}','ExpenseTypeController@edit');
 
 Route::get('list/expense-type', 'ExpenseTypeController@list')->name('list_expense_type');
 
-Route::get('delete/expense-type/{$id}','ExpenseTypeController@delete');
 
-Route::post('create/expense-type', 'ExpenseTypeController@create');
+
+
 
 
 ?>
