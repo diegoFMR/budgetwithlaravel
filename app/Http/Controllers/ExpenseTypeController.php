@@ -10,27 +10,33 @@ use DB;
 class ExpenseTypeController{
 
 	public function insert(Request $request){
-		$id = $request->input('id');
-		$name = $request->input('name');
-		$description = $request->input('description');
 
-		//If it has ID it's an update
-		if(!$id == ''){
+		$validatedData = $request->validate([
+			'name'=>'required',
+			'description'=>'required'
+		]);
 
-			DB::table('expense_type')->where('id',$id)->update(['name'=> $name,'description'=>$description]);
+		 $id = $request->input('id');
+		 $name = $request->input('name');
+		 $description = $request->input('description');
 
-			return	redirect()->route('list_expense_type')->with('msj', 'UPDATED!!'); //Return to the view List	
+		// If it has ID it's an update
+		 if(!$id == ''){
 
-		}else{
-			//Validate if insert was succesfull
-			if(DB::table('expense_type')->
-				insert(['name'=> $name,'description'=>$description]) ){
+		 	DB::table('expense_type')->where('id',$id)->update(['name'=> $name,'description'=>$description]);
 
-				return	redirect()->route('list_expense_type')->with('msj', 'INSERTED!!'); //Return to the view List	
-			}else{
-				echo "There was a problem;";
-			}	
-		}
+		 	return	redirect()->route('list_expense_type')->with('msj', 'UPDATED!!'); //Return to the view List	
+
+		 }else{
+		 	//Validate if insert was succesfull
+		 	if(DB::table('expense_type')->
+		 		insert(['name'=> $name,'description'=>$description]) ){
+
+		 		return	redirect()->route('list_expense_type')->with('msj', 'INSERTED!!'); //Return to the view List	
+		 	}else{
+		 		echo "There was a problem;";
+		 	}	
+		 }//end !id else
 		
 	}//end addExpenseType
 
@@ -56,7 +62,7 @@ class ExpenseTypeController{
 	public function delete(Request $request){
 		$id = $request->input('dataId');
 
-		DB::table('expense_type')->where('id',$id)->delete();
+		DB::table('expense_type')->where('id',	$id)->delete();
 		
 		return	redirect()->route('list_expense_type')->with('msj', 'Deleted succesfully!!');
 	}//end addExpenseType
